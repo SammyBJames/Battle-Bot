@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Battle Bot{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        background: '#09090b',
+                        foreground: '#fafafa',
+                        card: {
+                            DEFAULT: '#09090b',
+                            foreground: '#fafafa',
+                        },
+                        popover: {
+                            DEFAULT: '#09090b',
+                            foreground: '#fafafa',
+                        },
+                        primary: {
+                            DEFAULT: '#fafafa',
+                            foreground: '#18181b',
+                        },
+                        secondary: {
+                            DEFAULT: '#27272a',
+                            foreground: '#fafafa',
+                        },
+                        muted: {
+                            DEFAULT: '#27272a',
+                            foreground: '#a1a1aa',
+                        },
+                        accent: {
+                            DEFAULT: '#27272a',
+                            foreground: '#fafafa',
+                        },
+                        destructive: {
+                            DEFAULT: '#7f1d1d',
+                            foreground: '#fafafa',
+                        },
+                        border: '#27272a',
+                        input: '#27272a',
+                        ring: '#d4d4d8',
+                    },
+                    borderRadius: {
+                        lg: '0.5rem',
+                        md: 'calc(0.5rem - 2px)',
+                        sm: 'calc(0.5rem - 4px)',
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-background text-foreground min-h-screen flex flex-col antialiased">
+    <nav class="border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <div class="container flex h-14 max-w-screen-2xl items-center px-8">
+            <div class="mr-4 hidden md:flex">
+                <a class="prevent-select mr-6 flex items-center space-x-2 font-bold" href="/">
+                    Battle Bot
+                </a>
+            </div>
+            <div class="flex flex-1 items-center justify-between space-x-2 md:justify-end">
+                <div class="w-full flex-1 md:w-auto md:flex-none">
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <main class="flex-1 flex items-center justify-center p-6">
+        <div class="w-full max-w-3xl space-y-6">
+            {% block content %}{% endblock %}
+        </div>
+    </main>
+
+    <footer class="py-6 md:px-8 md:py-0">
+        <div class="container flex flex-col items-center justify-between gap-4 md:h-24 md:flex-row">
+            <p class="text-center text-sm leading-loose text-muted-foreground md:text-left">
+                Built for <span class="font-medium text-foreground">Cyber Challenge 2026</span>.
+            </p>
+        </div>
+    </footer>
+</body>
+</html>

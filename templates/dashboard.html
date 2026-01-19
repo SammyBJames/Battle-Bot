@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+
+{% block title %}Battle Bot - Dashboard{% endblock %}
+
+{% block content %}
+<div class="grid gap-6">
+    <div class="flex items-center justify-between">
+        <h2 class="text-3xl font-bold tracking-tight">Dashboard</h2>
+        <div class="flex items-center space-x-2">
+            <span class="text-sm text-muted-foreground">Logged in as <strong class="text-foreground">{{ user.username }}</strong> ({{ user.role }})</span>
+            <a href="{{ url_for('logout') }}" class="inline-flex h-9 items-center justify-center rounded-md border border-input bg-transparent px-4 py-2 text-sm font-medium shadow-sm ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50">
+                Logout
+            </a>
+        </div>
+    </div>
+
+    <!-- Search Section (Level 2/3) -->
+    <div class="rounded-xl border border-border bg-card text-card-foreground shadow-sm">
+        <div class="flex flex-col space-y-1.5 p-6">
+            <h3 class="font-semibold leading-none tracking-tight text-xl">Item Database</h3>
+            <p class="text-sm text-muted-foreground">Search for available robot modules.</p>
+        </div>
+        <div class="p-6 pt-0">
+            {% if search_enabled %}
+                <form action="{{ url_for('search') }}" method="get" class="flex w-full max-w-sm items-center space-x-2 mb-4">
+                    <input type="text" name="q" placeholder="Search items..." class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50">
+                    <button type="submit" class="inline-flex h-10 items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground ring-offset-background transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50">
+                        Search
+                    </button>
+                </form>
+
+                {% if results %}
+                <div class="rounded-md border border-border">
+                    <table class="w-full caption-bottom text-sm text-left">
+                        <thead class="[&_tr]:border-b">
+                            <tr class="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
+                                <th class="h-12 px-4 align-middle font-medium text-muted-foreground">ID</th>
+                                <th class="h-12 px-4 align-middle font-medium text-muted-foreground">Name/Username</th>
+                                <th class="h-12 px-4 align-middle font-medium text-muted-foreground">Description/Password</th>
+                                <th class="h-12 px-4 align-middle font-medium text-muted-foreground">Category/Role</th>
+                            </tr>
+                        </thead>
+                        <tbody class="[&_tr:last-child]:border-0">
+                            {% for row in results %}
+                            <tr class="border-b border-border transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
+                                <td class="p-4 align-middle">{{ row[0] }}</td>
+                                <td class="p-4 align-middle">{{ row[1] }}</td>
+                                <td class="p-4 align-middle">{{ row[2] }}</td>
+                                <td class="p-4 align-middle">{{ row[3] }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% endif %}
+
+            {% else %}
+                <div class="rounded-md bg-secondary p-4 text-center">
+                    <p class="text-sm text-muted-foreground">
+                        Search functionality is currently <strong>disabled</strong> for maintenance.
+                        <br>
+                        <span class="text-xs opacity-50">(Hint: Check your cookies)</span>
+                    </p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Admin Control Panel (Level 4/Win) -->
+    {% if user.role == 'admin' %}
+    <div class="rounded-xl border border-border bg-card text-card-foreground shadow-sm">
+        <div class="flex flex-col space-y-1.5 p-6">
+            <h3 class="font-semibold leading-none tracking-tight text-xl text-destructive">Admin Control Panel</h3>
+            <p class="text-sm text-muted-foreground">Manual Override Engaged.</p>
+        </div>
+        <div class="p-6 pt-0">
+            <div class="flex flex-col items-center gap-4">
+                <!-- Up -->
+                <form action="{{ url_for('move_robot', direction='forward') }}" method="post">
+                    <button class="h-12 w-12 rounded-md bg-primary hover:bg-primary/90 text-primary-foreground flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg>
+                    </button>
+                </form>
+                
+                <div class="flex gap-4">
+                    <!-- Left -->
+                    <form action="{{ url_for('move_robot', direction='left') }}" method="post">
+                        <button class="h-12 w-12 rounded-md bg-primary hover:bg-primary/90 text-primary-foreground flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+                        </button>
+                    </form>
+                    
+                    <!-- Down -->
+                    <form action="{{ url_for('move_robot', direction='backward') }}" method="post">
+                         <button class="h-12 w-12 rounded-md bg-primary hover:bg-primary/90 text-primary-foreground flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                        </button>
+                    </form>
+
+                    <!-- Right -->
+                    <form action="{{ url_for('move_robot', direction='right') }}" method="post">
+                        <button class="h-12 w-12 rounded-md bg-primary hover:bg-primary/90 text-primary-foreground flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            {% if message %}
+            <div class="mt-6 rounded-md bg-accent p-3 text-center text-sm">
+                {{ message }}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

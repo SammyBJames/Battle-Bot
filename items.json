@@ -1,0 +1,482 @@
+[
+  {
+    "name": "Omni-Spectral Lidar Array",
+    "description": "High-resolution distance mapping across visible and infrared spectrums.",
+    "category": "Sensor"
+  },
+  {
+    "name": "Quantum Gyro Stabilizer",
+    "description": "Maintains perfect balance using entangled particle spin states.",
+    "category": "Actuator"
+  },
+  {
+    "name": "Micro-Fusion Core V3",
+    "description": "Compact fusion reactor providing steady high-output voltage.",
+    "category": "Power"
+  },
+  {
+    "name": "Neural Net Processor Unit",
+    "description": "specialized silicon for rapid AI decision making and pattern recognition.",
+    "category": "Compute"
+  },
+  {
+    "name": "Ablative Carbon Armor Plating",
+    "description": "Sacrificial outer layer designs to absorb thermal damage.",
+    "category": "Defense"
+  },
+  {
+    "name": "Pulse Laser Emitter",
+    "description": "Rapid-fire directed energy weapon for light combat.",
+    "category": "Weapon"
+  },
+  {
+    "name": "Holographic HUD Projector",
+    "description": "Projects tactical data overlays into free space.",
+    "category": "Interface"
+  },
+  {
+    "name": "Ultrasonic Rangefinder Array",
+    "description": "Short-range obstacle detection using high-frequency sound waves.",
+    "category": "Sensor"
+  },
+  {
+    "name": "HydraulicPiston MK-IV",
+    "description": "Heavy-duty lifting actuator for arm manipulation.",
+    "category": "Actuator"
+  },
+  {
+    "name": "Solid State Battery Pack",
+    "description": "High-density energy storage with rapid discharge capability.",
+    "category": "Power"
+  },
+  {
+    "name": "Tactical Uplink Module",
+    "description": "Secure encrypted channel for receiving command directives.",
+    "category": "Interface"
+  },
+  {
+    "name": "EMP Shield Generator",
+    "description": "Protects internal electronics from electromagnetic pulses.",
+    "category": "Defense"
+  },
+  {
+    "name": "Railgun Accelerator",
+    "description": "Magnetic mass driver for kinetic projectile delivery.",
+    "category": "Weapon"
+  },
+  {
+    "name": "Positronic Brain Co-Processor",
+    "description": "Ethical constraint solver and logic deduction unit.",
+    "category": "Compute"
+  },
+  {
+    "name": "Thermal Imaging Camera",
+    "description": "Detects heat signatures through smoke and darkness.",
+    "category": "Sensor"
+  },
+  {
+    "name": "Myomer Artificial Muscle Bundle",
+    "description": "Contractile fibers simulating organic movement strength.",
+    "category": "Actuator"
+  },
+  {
+    "name": "Solar Trickle Charger",
+    "description": "Photovoltaic coating for passive energy regeneration.",
+    "category": "Power"
+  },
+  {
+    "name": "Targeting Servo Motor",
+    "description": "Precision micro-motor for weapon alignment.",
+    "category": "Actuator"
+  },
+  {
+    "name": "Reactive Armor Tiles",
+    "description": "Explosive plates that neutralize incoming kinetic rounds.",
+    "category": "Defense"
+  },
+  {
+    "name": "Plasma Cutter Torch",
+    "description": "Short-range industrial tool repurposed for melee damage.",
+    "category": "Weapon"
+  },
+  {
+    "name": "Vocal Synthesis Module",
+    "description": "Generates human-like speech for communication.",
+    "category": "Interface"
+  },
+  {
+    "name": "Seismic Vibration Sensor",
+    "description": "Detects ground movement from approaching heavy units.",
+    "category": "Sensor"
+  },
+  {
+    "name": "Hyper-Threading CPU",
+    "description": "General purpose central processing unit for system tasks.",
+    "category": "Compute"
+  },
+  {
+    "name": "Graphene Supercapacitor",
+    "description": "Provides burst energy for high-draw subsystems.",
+    "category": "Power"
+  },
+  {
+    "name": "Smoke Screen Dispenser",
+    "description": "Deploys visual and IR-blocking aerosol clouds.",
+    "category": "Defense"
+  },
+  {
+    "name": "Sonic Cannon",
+    "description": "Non-lethal crowd control device using focused sound.",
+    "category": "Weapon"
+  },
+  {
+    "name": "Direct Neural Interface",
+    "description": "Allows direct pilot connection via brain-computer link.",
+    "category": "Interface"
+  },
+  {
+    "name": "Barometric Altimeter",
+    "description": "Measures atmospheric pressure for altitude maintainence.",
+    "category": "Sensor"
+  },
+  {
+    "name": "Servo-Hydraulic Knee Joint",
+    "description": "Main load-bearing articulation for bipedal movement.",
+    "category": "Actuator"
+  },
+  {
+    "name": "Radioisotope Thermoelectric Generator",
+    "description": "Long-term low-wattage power source for deep space ops.",
+    "category": "Power"
+  },
+  {
+    "name": "Cryptographic Security Chip",
+    "description": "Hardware-accelerated encryption and decryption module.",
+    "category": "Compute"
+  },
+  {
+    "name": "Point Defense Laser",
+    "description": "Automated system to intercept incoming missiles.",
+    "category": "Defense"
+  },
+  {
+    "name": "Flechette Launcher",
+    "description": "Discharges a cloud of razor-sharp darts.",
+    "category": "Weapon"
+  },
+  {
+    "name": "Haptic Feedback Glove",
+    "description": "Remote control interface with tactile sensation return.",
+    "category": "Interface"
+  },
+  {
+    "name": "Magnetometer Compass",
+    "description": "Determines heading based on planetary magnetic fields.",
+    "category": "Sensor"
+  },
+  {
+    "name": "Rotary Actuator Ring",
+    "description": "Provides continuous 360-degree waist rotation.",
+    "category": "Actuator"
+  },
+  {
+    "name": "Hydrogen Fuel Cell",
+    "description": "Converts hydrogen gas into electricity and water.",
+    "category": "Power"
+  },
+  {
+    "name": "Sensor Fusion Coprocessor",
+    "description": "Merges data streams from various sensors into one model.",
+    "category": "Compute"
+  },
+  {
+    "name": "Energy Shield Refractor",
+    "description": "Deflects energy-based attacks away from the chassis.",
+    "category": "Defense"
+  },
+  {
+    "name": "Arc Welder Arm",
+    "description": "High-voltage discharge tool for repairs or combat.",
+    "category": "Weapon"
+  },
+  {
+    "name": "Diagnostic Touchscreen",
+    "description": "On-board maintenance panel for system checks.",
+    "category": "Interface"
+  },
+  {
+    "name": "Radiation Dosimeter",
+    "description": "Monitors environmental radiation levels.",
+    "category": "Sensor"
+  },
+  {
+    "name": "Linear Stepper Motor",
+    "description": "Precise incremental movement for fine manipulation.",
+    "category": "Actuator"
+  },
+  {
+    "name": "Zero-Point Energy Siphon",
+    "description": "Theoretical power source tapping vacuum energy.",
+    "category": "Power"
+  },
+  {
+    "name": "Ballistic Calculation Core",
+    "description": "Predicts projectile trajectories and impact points.",
+    "category": "Compute"
+  },
+  {
+    "name": "Active Camouflage Mesh",
+    "description": "Bends light around the chassis to render it invisible.",
+    "category": "Defense"
+  },
+  {
+    "name": "Missile Pod Array",
+    "description": "Multi-tube launcher for seeking projectiles.",
+    "category": "Weapon"
+  },
+  {
+    "name": "Biometric Scanner",
+    "description": "Authenticates authorized personnel via retinal scan.",
+    "category": "Interface"
+  },
+  {
+    "name": "Inertial Measurement Unit",
+    "description": "Tracks acceleration and angular velocity.",
+    "category": "Sensor"
+  },
+  {
+    "name": "Pneumatic Gripper Claws",
+    "description": "Compressed air driven clamps for holding objects.",
+    "category": "Actuator"
+  },
+  {
+    "name": "Antimatter Containment Field",
+    "description": "Suspends fuel for the primary drive, preventing annihilation.",
+    "category": "Power"
+  },
+  {
+    "name": "Pattern Matching AI",
+    "description": "Identifies enemy unit types from visual databases.",
+    "category": "Compute"
+  },
+  {
+    "name": "Electronic Countermeasures Suite",
+    "description": "Jams enemy radar and targeting locks.",
+    "category": "Defense"
+  },
+  {
+    "name": "Flamethrower Nozzle",
+    "description": "Projects a stream of ignited liquid fuel.",
+    "category": "Weapon"
+  },
+  {
+    "name": "Short-Wave Radio Transceiver",
+    "description": "Legacy communication backup for high interference zones.",
+    "category": "Interface"
+  },
+  {
+    "name": "Chemical Sniffer",
+    "description": "Detects trace explosives or toxins in the air.",
+    "category": "Sensor"
+  },
+  {
+    "name": "Harmonic Drive Gearbox",
+    "description": "Zero-backlash gearing for high precision joints.",
+    "category": "Actuator"
+  },
+  {
+    "name": "Bio-Ethanol Combustor",
+    "description": "Burns organic matter to generate power.",
+    "category": "Power"
+  },
+  {
+    "name": "Pathfinding Logic Circuit",
+    "description": "Calculates optimal routes through complex terrain.",
+    "category": "Compute"
+  },
+  {
+    "name": "Reinforced Titanium Chassis",
+    "description": "Structural skeleton providing core physical durability.",
+    "category": "Defense"
+  },
+  {
+    "name": "Ion Cannon",
+    "description": "Disables electronics with a stream of ionized particles.",
+    "category": "Weapon"
+  },
+  {
+    "name": "Fiber Optic Data Link",
+    "description": "High-speed wired connection port for base docking.",
+    "category": "Interface"
+  },
+  {
+    "name": "Doppler Radar",
+    "description": "Tracks velocity of moving objects in the environment.",
+    "category": "Sensor"
+  },
+  {
+    "name": "Torque Multiplier Joint",
+    "description": "Increases rotational force for heavy lifting.",
+    "category": "Actuator"
+  },
+  {
+    "name": "Wireless Inductive Receiver",
+    "description": "Allows charging without physical cable connection.",
+    "category": "Power"
+  },
+  {
+    "name": "Memory Bank Expansion",
+    "description": "Additional solid state storage for mission logs.",
+    "category": "Compute"
+  },
+  {
+    "name": "Flare Dispenser",
+    "description": "Releases heat decoys to confuse IR tracking missiles.",
+    "category": "Defense"
+  },
+  {
+    "name": "Gatling Cannon",
+    "description": "Multi-barrel rotary machine gun for sustained fire.",
+    "category": "Weapon"
+  },
+  {
+    "name": "Status LED Array",
+    "description": "Simple visual indicators for system health.",
+    "category": "Interface"
+  },
+  {
+    "name": "Microphone Phased Array",
+    "description": "Localizes sound sources with high precision.",
+    "category": "Sensor"
+  },
+  {
+    "name": "Hover-Fan Impeller",
+    "description": "Generates lift for ground-effect mobility.",
+    "category": "Actuator"
+  },
+  {
+    "name": "Deuterium Storage Tank",
+    "description": "High-pressure vessel for fusion fuel.",
+    "category": "Power"
+  },
+  {
+    "name": "Heuristic Learning Module",
+    "description": "Adapts behavioral algorithms based on past failures.",
+    "category": "Compute"
+  },
+  {
+    "name": "Hardened Optics Shutter",
+    "description": "Physical blinders to protect lenses from intense light.",
+    "category": "Defense"
+  },
+  {
+    "name": "Shock Rifle",
+    "description": "Delivers an incapacitating electrical discharge at range.",
+    "category": "Weapon"
+  },
+  {
+    "name": "Telemetry Antenna",
+    "description": "Broadcasts operational stats to mission control.",
+    "category": "Interface"
+  },
+  {
+    "name": "Pressure Sensitive Skin",
+    "description": "Synthetic covering that detects contact location and force.",
+    "category": "Sensor"
+  },
+  {
+    "name": "Magnetic Locking Grips",
+    "description": "Electromagnets in feet for climbing metal surfaces.",
+    "category": "Actuator"
+  },
+  {
+    "name": "Kinetic Recharge System",
+    "description": "Recovers energy from movement and braking.",
+    "category": "Power"
+  },
+  {
+    "name": "Quantum Encryption Key",
+    "description": "Unbreakable verification token for command authority.",
+    "category": "Compute"
+  },
+  {
+    "name": "Shock Absorber Struts",
+    "description": "Dampens impact forces from falls or rough terrain.",
+    "category": "Defense"
+  },
+  {
+    "name": "Acid Sprayer",
+    "description": "Ejects a corrosive liquid stream.",
+    "category": "Weapon"
+  },
+  {
+    "name": "Emergency Beacon",
+    "description": "Broadcasts distress signal on all frequencies.",
+    "category": "Interface"
+  },
+  {
+    "name": "Geiger Counter",
+    "description": "Detects ionizing radiation particles.",
+    "category": "Sensor"
+  },
+  {
+    "name": "Variable Geometry Wing",
+    "description": "Adjustable aerodynamic surfaces for flight control.",
+    "category": "Actuator"
+  },
+  {
+    "name": "Thermal Regulation Pump",
+    "description": "Circulates coolant to prevent system overheating.",
+    "category": "Power"
+  },
+  {
+    "name": "Language Translation Matrix",
+    "description": "Decodes and encodes millions of distinct dialects.",
+    "category": "Compute"
+  },
+  {
+    "name": "Self-Repair Nanobots",
+    "description": "Microscopic machines that fix minor structural damage.",
+    "category": "Defense"
+  },
+  {
+    "name": "Neural Scrambler",
+    "description": "Disrupts biological nervous systems within radius.",
+    "category": "Weapon"
+  },
+  {
+    "name": "Augmented Reality Visor",
+    "description": "Overlay for human operators inspecting the unit.",
+    "category": "Interface"
+  },
+  {
+    "name": "Spectroscopic Analyzer",
+    "description": "Determines material composition of target objects.",
+    "category": "Sensor"
+  },
+  {
+    "name": "Reaction Wheel Assembly",
+    "description": "Spins flywheels to adjust orientation in zero-G.",
+    "category": "Actuator"
+  },
+  {
+    "name": "Antimatter Spark Plug",
+    "description": "Catalyst device for staring high-yield reactors.",
+    "category": "Power"
+  },
+  {
+    "name": "Aim Assist Coprocessor",
+    "description": "Adjusts crosshairs for wind and target movement.",
+    "category": "Compute"
+  },
+  {
+    "name": "Faraday Cage Mesh",
+    "description": "Conductive enclosure to block external static fields.",
+    "category": "Defense"
+  },
+  {
+    "name": "Phase Disruptor",
+    "description": "Destabilizes molecular bonds of targets.",
+    "category": "Weapon"
+  }
+]
