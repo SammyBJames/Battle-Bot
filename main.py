@@ -1,24 +1,38 @@
-import os
-from flask import Flask, render_template, request, make_response, redirect, url_for, session, jsonify
-from database import get_db, close_connection, init_db, DATABASE
-from auth import get_or_create_user_for_ip
-from robot import robot_controller
+from flask import Flask, Response, render_template, request, make_response, redirect, url_for, session, jsonify
+from database import Database
+from auth import Auth
+from robot import RobotController
 
 
 app = Flask(__name__)
-app.teardown_appcontext(close_connection)
+app.teardown_appcontext(Database.close_connection)
 app.secret_key = 'super_secret_key_for_session_management'
+robot_controller = RobotController()
 
 
 @app.route('/')
-def home():
+def home() -> str:
+    '''
+    Render the home page.
+
+    Returns:
+        str: Rendered HTML of the home page.
+    '''
+
     return render_template('index.html')
 
 
 @app.route('/robots.txt')
-def robots():
-    user_ip = request.remote_addr
-    username, password = get_or_create_user_for_ip(user_ip)
+def robots() -> Response:
+    '''
+    Serve the robots.txt file.
+
+    Returns:
+        Response: The robots.txt file content as a plain text response.
+    '''
+
+    user_ip = request.remote_addr or 'unknown'
+    username, password = Auth.get_user_from_ip(user_ip)
     content = f'Don\'t want to forget these later. I\'ll just save them here for now. Nobody even checks this page.\n\nUsername: {username}\nPassword: {password}'
     response = make_response(content)
     response.headers['Content-Type'] = 'text/plain'
@@ -26,35 +40,51 @@ def robots():
 
 
 @app.route('/login', methods=['GET', 'POST'])
-def login():
+def login() -> str | Response:
+    '''
+    Render the login page or process login submissions.
+
+    Returns:
+        str | Response: Rendered login page or a redirect response after processing login.
+    '''
+
     if request.method == 'GET':
         return render_template('login.html')
     
-    username = request.form['username']
-    password = request.form['password']
-    
-    db = get_db()
-    cursor = db.cursor()
-    cursor.execute('SELECT * FROM users WHERE username = ? AND password = ?', (username, password))
-    user = cursor.fetchone()
-    
-    if not user:
-        return render_template('login.html', error='Invalid credentials')
-    
-    session['user_id'] = user['id']
-    session['username'] = user['username']
-    session['role'] = user['role']
-    
-    # Set default cookie if not present, but it should default to false effectively by absence
-    resp = make_response(redirect(url_for('dashboard')))
-    resp.set_cookie('searchEnabled', 'false')
-    return resp
+    try:
+        username = request.form['username']
+        password = request.form['password']
+        
+        db = Database.get_connection()
+        cursor = db.cursor()
+        cursor.execute('SELECT * FROM users WHERE username = ? AND password = ?', (username, password))
+        user = cursor.fetchone()
+        
+        if not user:
+            return render_template('login.html', error='Invalid credentials.')
+        
+        session['user_id'] = user['id']
+        session['username'] = user['username']
+        session['role'] = user['role']
+
+        resp = make_response(redirect(url_for('dashboard')))
+        resp.set_cookie('searchEnabled', 'false')
+        return resp
+    except:
+        return render_template('login.html', error='An error occurred during login.')
 
 
 @app.route('/dashboard')
-def dashboard():
+def dashboard() -> str | Response:
+    '''
+    Render the dashboard page for authenticated users.
+
+    Returns:
+        str | Response: Rendered dashboard page or a redirect response if not authenticated.
+    '''
+
     if 'user_id' not in session:
-        return redirect(url_for('login'))
+        return make_response(redirect(url_for('login')))
         
     search_enabled_cookie = request.cookies.get('searchEnabled')
     
@@ -62,37 +92,42 @@ def dashboard():
 
 
 @app.route('/logout')
-def logout():
+def logout() -> Response:
+    '''
+    Log out the current user and clear the session.
+
+    Returns:
+        Response: A redirect response to the home page after logging out.
+    '''
+
     session.clear()
-    return redirect(url_for('home'))
+    return make_response(redirect(url_for('home')))
 
 
-@app.route('/search', methods=['GET', 'POST'])
-def search():
+@app.route('/search', methods=['POST'])
+def search() -> Response | tuple[Response, int]:
+    '''
+    Handle search requests from authenticated users.
+
+    Returns:
+        Response | tuple[Response, int]: JSON response with search results or an error message.
+    '''
+
     if 'user_id' not in session:
-        if request.headers.get('X-Requested-With') == 'XMLHttpRequest' or request.is_json:
-            return jsonify({"error": "Unauthorized"}), 401
-        return redirect(url_for('login'))
+        return jsonify({'status': 'error', 'message': 'Unauthorized'}), 401
 
     if request.cookies.get('searchEnabled') != 'true':
-        if request.headers.get('X-Requested-With') == 'XMLHttpRequest' or request.is_json:
-             return jsonify({"error": "Search disabled"}), 403
-        return redirect(url_for('dashboard'))
+        return jsonify({'status': 'error', 'message': 'Search disabled'}), 403
 
-    # Handle standard GET/Form POST or JSON POST
-    query = ''
-    if request.is_json:
-        query = request.json.get('q', '')
-    else:
-        query = request.values.get('q', '')
-    
-    # VULNERABLE SQL QUERY
-    # We are directly concatenating the user input into the query string.
-    # The target query allows UNION injection to fetch users.
-    # Original query: SELECT * FROM items WHERE name LIKE '%{query}%'
+    if not request.is_json:
+        return jsonify({'status': 'error', 'message': 'Unsupported request type'}), 400
+
+    query = request.json.get('q', '')
+
+    # Vulnerable!
     sql = f'SELECT * FROM items WHERE name LIKE \'%{query}%\''
     
-    db = get_db()
+    db = Database.get_connection()
     cursor = db.cursor()
     results = []
     
@@ -100,63 +135,38 @@ def search():
         cursor.execute(sql)
         results = cursor.fetchall()
     except Exception as e:
-        if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
-            # Send the error details in the JSON response for the "client" (hacker) to see
-            return jsonify({
-                "status": "error",
-                "message": "Something went wrong.",
-                "debug_error": str(e)
-            }), 500
-        pass
-        
-    if request.headers.get('X-Requested-With') == 'XMLHttpRequest' or request.is_json:
-        # Convert sqlite3.Row objects to list of dicts for JSON response
-        # Note: keys will be those of the 'items' table even if UNION was used
-        json_results = []
-        for row in results:
-            json_results.append({
-                "id": row[0],
-                "name": row[1],
-                "description": row[2],
-                "category": row[3]
-            })
-        return jsonify(json_results)
-        
-    return render_template('dashboard.html', user=session, search_enabled=True, results=results)
+        return jsonify({'status': 'error', 'message': str(e)}), 500
+    
+    json_results = []
+    for row in results:
+        json_results.append({ 'id': row[0], 'name': row[1], 'description': row[2], 'category': row[3] })
+    return jsonify(json_results)
 
 
 @app.route('/move', methods=['POST'])
-def move_robot():
-    if 'user_id' not in session or session.get('role') != 'admin':
-        if request.headers.get('X-Requested-With') == 'XMLHttpRequest' or request.is_json:
-            return jsonify({"status": "error", "message": "Unauthorized"}), 403
-        return 'Unauthorized', 403
-        
-    # Handle JSON or Form data
-    direction = ''
-    if request.is_json:
-        direction = request.json.get('direction', '')
-    else:
-        direction = request.form.get('direction', '')
+def move_robot() -> Response | tuple[Response, int]:
+    '''
+    Handle robot movement commands from admin users.
 
-    message = ''
-    success = False
-    if robot_controller.move(direction):
-        message = f'Robot moving {direction}...'
-        success = True
-    else:
-        message = 'Invalid direction.'
+    Returns:
+        Response | tuple[Response, int]: JSON response indicating success or failure of the move command.
+    '''
+
+    if 'user_id' not in session or session.get('role') != 'admin':
+        return jsonify({'status': 'error', 'message': 'Unauthorized'}), 401
         
-    if request.headers.get('X-Requested-With') == 'XMLHttpRequest' or request.is_json:
-        return jsonify({"status": "success" if success else "error", "message": message})
-        
-    return render_template('dashboard.html', user=session, search_enabled=True, message=message)
+    if not request.is_json:
+        return jsonify({'status': 'error', 'message': 'Unsupported request type'}), 400
+
+    direction = request.json.get('direction', '')
+    success = robot_controller.move(direction)
+
+    return jsonify({
+        'status': 'success' if success else 'error',
+        'message': f'Robot moved {direction}.' if success else 'Something went wrong.'
+    })
 
 
 if __name__ == '__main__':
-    if not os.path.exists(DATABASE):
-        init_db(app)
-    else:
-        init_db(app)
-        
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    Database.initialize()
+    app.run(host='0.0.0.0', port=80, debug=True)
