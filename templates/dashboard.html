@@ -37,18 +37,7 @@
                                 <th class="h-12 px-4 align-middle font-medium text-muted-foreground">Category</th>
                             </tr>
                         </thead>
-                        <tbody id="results-body" class="[&_tr:last-child]:border-0">
-                            {% if results %}
-                            {% for row in results %}
-                            <tr class="border-b border-border transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
-                                <td class="p-4 align-middle">{{ row[0] }}</td>
-                                <td class="p-4 align-middle">{{ row[1] }}</td>
-                                <td class="p-4 align-middle">{{ row[2] }}</td>
-                                <td class="p-4 align-middle">{{ row[3] }}</td>
-                            </tr>
-                            {% endfor %}
-                            {% endif %}
-                        </tbody>
+                        <tbody id="results-body" class="[&_tr:last-child]:border-0"></tbody>
                     </table>
                 </div>
             {% else %}
@@ -68,10 +57,10 @@
         <div class="rounded-xl border border-border bg-card text-card-foreground shadow-sm">
             <div class="flex flex-col space-y-1.5 p-6">
                 <h3 class="font-semibold leading-none tracking-tight text-xl text-destructive">Admin Control Panel</h3>
-                <p class="text-sm text-muted-foreground">Manual Override Engaged.</p>
+                <p class="text-sm text-muted-foreground">Manual override</p>
             </div>
             <div class="p-6 pt-0">
-                <div class="flex flex-col items-center justify-center gap-4 py-4">
+                <div class="robot-controls flex flex-col items-center justify-center gap-4 py-4">
                     <!-- Up -->
                     <form action="{{ url_for('move_robot') }}" method="post" data-direction="forward">
                         <input type="hidden" name="direction" value="forward">
@@ -116,7 +105,7 @@
             <div class="p-1 pt-0">
                 <div class="rounded-md bg-muted/30 p-4 h-[200px] overflow-y-auto">
                     <div id="robot-log" class="flex flex-col space-y-2 text-xs font-mono">
-                        <div class="text-muted-foreground italic">System ready to engage...</div>
+                        <div class="text-muted-foreground italic">Ready...</div>
                     </div>
                 </div>
             </div>

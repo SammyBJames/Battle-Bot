@@ -86,9 +86,9 @@ def dashboard() -> str | Response:
     if 'user_id' not in session:
         return make_response(redirect(url_for('login')))
         
-    search_enabled_cookie = request.cookies.get('searchEnabled')
+    search_enabled = request.cookies.get('searchEnabled') == 'true' or session.get('role') == 'admin'
     
-    return render_template('dashboard.html', user=session, search_enabled=search_enabled_cookie == 'true')
+    return render_template('dashboard.html', user=session, search_enabled=search_enabled)
 
 
 @app.route('/logout')
@@ -116,7 +116,7 @@ def search() -> Response | tuple[Response, int]:
     if 'user_id' not in session:
         return jsonify({'status': 'error', 'message': 'Unauthorized'}), 401
 
-    if request.cookies.get('searchEnabled') != 'true':
+    if request.cookies.get('searchEnabled') != 'true' and session.get('role') != 'admin':
         return jsonify({'status': 'error', 'message': 'Search disabled'}), 403
 
     if not request.is_json:

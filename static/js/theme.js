@@ -1,5 +1,5 @@
 tailwind.config = {
-    darkMode: 'media', // Use system preference or color-scheme
+    darkMode: 'media',
     theme: {
         extend: {
             colors: {

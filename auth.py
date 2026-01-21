@@ -38,10 +38,12 @@ class Auth:
         cursor = db.cursor()
         
         # Check if this IP already has a user
-        cursor.execute('SELECT username, password FROM ip_mappings WHERE ip = ?', (ip_address,))
+        cursor.execute('SELECT username FROM ip_mappings WHERE ip = ?', (ip_address,))
         row = cursor.fetchone()
         
         if row:
+            cursor.execute('SELECT username, password FROM users WHERE username = ?', (row['username'],))
+            row = cursor.fetchone()
             return row['username'], row['password']
                 
         # No user found, create new one
