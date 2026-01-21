@@ -5,7 +5,7 @@ from flask import g
 
 
 DATABASE = 'battlebot.db'
-ADMIN_PASSWORD = 'admin_super_secret_password_123'
+ADMIN_PASSWORD = 'i_LoVe_uSu_SOC_2026!'
 
 
 class Database:

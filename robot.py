@@ -15,8 +15,7 @@ class RobotController:
         '''
 
         try:
-            # self.kit = MotorKit()
-            pass
+            self.kit = MotorKit()
         except Exception as e:
             print(f'Warning: MotorKit could not be initialized. Running in simulation mode. Error: {e}')
             
@@ -25,8 +24,14 @@ class RobotController:
         self.worker_thread.start()
 
     def _move_hardware(self, left: float, right: float) -> None:
-        sleep(1)
-        return
+        '''
+        Move the robot hardware by setting motor throttles.
+
+        Args:
+            left (float): Throttle value for the left motor.
+            right (float): Throttle value for the right motor.
+        '''
+
         self.kit.motor1.throttle = left
         self.kit.motor2.throttle = right
         sleep(1)
