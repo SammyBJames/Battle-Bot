@@ -5,4 +5,5 @@ requires-python = ">=3.12"
 dependencies = [
     "adafruit-circuitpython-motorkit>=1.6.19",
     "flask>=3.1.2",
+    "rpi-gpio>=0.7.1",
 ]

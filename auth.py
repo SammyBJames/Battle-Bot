@@ -15,7 +15,7 @@ def get_or_create_user_for_ip(ip_address):
     cursor = db.cursor()
     
     # Check if this IP already has a user
-    cursor.execute('SELECT username FROM ip_users WHERE ip = ?', (ip_address,))
+    cursor.execute('SELECT username FROM ip_mappings WHERE ip = ?', (ip_address,))
     row = cursor.fetchone()
     
     if row:
@@ -37,7 +37,7 @@ def get_or_create_user_for_ip(ip_address):
         except sqlite3.IntegrityError:
             username, password = generate_credentials()
             
-    cursor.execute('INSERT OR REPLACE INTO ip_users (ip, username) VALUES (?, ?)', (ip_address, username))
+    cursor.execute('INSERT OR REPLACE INTO ip_mappings (ip, username) VALUES (?, ?)', (ip_address, username))
     db.commit()
     
     return username, password

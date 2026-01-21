@@ -7,8 +7,8 @@ import queue
 class RobotController:
     def __init__(self):
         try:
-            self.kit = MotorKit()
-            # pass
+            # self.kit = MotorKit()
+            pass
         except Exception as e:
             print(f'Warning: MotorKit could not be initialized. Running in simulation mode. Error: {e}')
             
@@ -17,8 +17,8 @@ class RobotController:
         self.worker_thread.start()
 
     def _move_hardware(self, left: float, right: float):
-        # sleep(1)
-        # return
+        sleep(1)
+        return
         self.kit.motor1.throttle = left
         self.kit.motor2.throttle = right
         sleep(1)

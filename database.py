@@ -67,7 +67,7 @@ def init_db(app):
             
         # Create IP Map table
         cursor.execute('''
-            CREATE TABLE IF NOT EXISTS ip_users (
+            CREATE TABLE IF NOT EXISTS ip_mappings (
                 ip TEXT PRIMARY KEY,
                 username TEXT NOT NULL
             )
